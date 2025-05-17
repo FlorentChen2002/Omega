@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import "./styles.css";
 
 function Forum({ user }) {
@@ -31,9 +32,16 @@ function Forum({ user }) {
     const navigate = useNavigate();
 
     // Effets
-    useEffect(() => {
-        console.log(user);
+    useEffect(async() => {
         document.body.classList.add("forum");
+        try {
+            const response = await axios.get('http://localhost:8000/api/user/forum');
+            if (response.data.status==200){
+                console.log(response)
+            }
+        }catch(e){
+            console.error("Erreur lors de l'envoi de la requête :", e);
+        }
         return () => {
             document.body.classList.remove("forum");
         };
@@ -56,9 +64,9 @@ function Forum({ user }) {
                         role="button"
                         tabIndex={0}
                     >
-                        <div className="post">
+                        <div className="post-forum">
                             <h3>{thread.title}</h3>
-                            <span className="replies">{thread.replies} 回复</span>
+                            <span className="replies-forum">{thread.replies} 回复</span>
                             <p>
                                 - 发布者: {thread.author} - 时间: {thread.date}
                             </p>
@@ -67,6 +75,7 @@ function Forum({ user }) {
                 ))}
             </main>
         </div>
+        
     );
 }
 

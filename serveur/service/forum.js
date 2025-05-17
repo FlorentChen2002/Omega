@@ -4,15 +4,24 @@ class Forum{
     this.db = db
     // suite plus tard avec la BD
   }
-  createCategories(titre,date,userid,userpseudo){
+  createCategories(titre,description,date,userid,userpseudo){
     return new Promise(async(resolve, reject) => {
-      console.log()
+      console.log("Insertion MongoDB avec :", {
+  titre,
+  description,
+  date,
+  userid,
+  userpseudo
+});
       const tmp = await this.db.collection("ForumDB").insertOne({
         titre: titre,
+        description:description,
         date: date,
         user_id:userid,
-        user_pseudo:userpseudo
+        user_pseudo:userpseudo,
       });
+      const tmp2 = await this.db.collection("ForumDB").find({}).toArray();
+      console.log(tmp2);
       if(tmp.acknowledged) {
         resolve(tmp.insertedId);
       } else {
@@ -21,7 +30,7 @@ class Forum{
     });
   }
 
-  createThreads(sujetid,content,userid,userpseudo,date){
+  createThreads(sujetid,content,userid,userpseudo,date,repond){
     return new Promise(async(resolve, reject) => {
       console.log()
       const tmp = await this.db.collection("ThreadDB").insertOne({
@@ -31,24 +40,7 @@ class Forum{
         user_id:userid,
         user_pseudo:userpseudo,
         date: date,
-        list_content:[]
-      });
-      if(tmp.acknowledged) {
-        resolve(tmp.insertedId);
-      } else {
-        reject();
-      }
-    });
-  }
-
-  createPosts(threadsid,userid,content,date){
-    return new Promise(async(resolve, reject) => {
-      console.log()
-      const tmp = await this.db.collection("PostDB").insertOne({
-        threads_id:threadsid,
-        user_id:userid,
-        content: content,
-        date: date
+        repond:repond
       });
       if(tmp.acknowledged) {
         resolve(tmp.insertedId);
@@ -60,7 +52,7 @@ class Forum{
   getAllSujet(){
     return new Promise(async(resolve, reject) => {
       const count = await this.db.collection('ForumDB').find({}).toArray();
-        resolve(count);
+      resolve(count);
     });
   }
   getThread(sujetid){
@@ -71,3 +63,4 @@ class Forum{
     });
   }
 }
+  exports.default = Forum;

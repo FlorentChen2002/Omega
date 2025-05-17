@@ -9,7 +9,7 @@ body.forum {
   justify-content: initial;
   align-items: initial;
   min-height: auto;
-  background: #f5f5f5;
+  background: #e8eaee83;
 }
 .header {
   position: fixed;
@@ -91,7 +91,7 @@ body.forum {
   padding: 0 20px;
 }
 
-.post {
+.post-forum {
   background: #fff;
   margin-bottom: 10px;
   padding: 15px;
@@ -99,7 +99,7 @@ body.forum {
   border: 1px solid #ddd;
 }
 
-.post h3 {
+.post-forum h3 {
   margin-bottom: 8px;
 }
 .post-link {
@@ -112,7 +112,7 @@ body.forum {
   display: block;
 }
 
-.post-link:hover .post {
+.post-link:hover .post-forum {
   background: #f0f8ff;
   transform: scale(1.05, 1);
 }
@@ -125,7 +125,7 @@ body.forum {
   font-size: 12px;
 }
 
-.replies {
+.replies-forum {
   float: right;
   color: #555;
 }

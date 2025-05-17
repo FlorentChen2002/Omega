@@ -1,5 +1,6 @@
 const express = require("express");
 const Users = require("../service/users.js");
+const Forum = require("../service/forum.js");
 const cors = require('cors');
 
 function init(db) {
@@ -179,18 +180,18 @@ function init(db) {
         }
     });
 
-
+    const forum = new Forum.default(db);
     router.get("/user/forum", async (req, res) =>{
         try{
-            const tmp = await users.getAllSujet();
+            const tmp = await forum.getAllSujet();
             if (tmp===null){
                 res.status(404).json({
                     status: 404,
-                    message: "Sujet existant"
+                    message: "Sujet inexistant"
                 });
             }
             else{
-                res.send(tmp);
+                res.status(200).send(tmp);
             }
 
         }catch(e){
@@ -200,19 +201,39 @@ function init(db) {
     router.get("/user/forum/get", async (req, res) =>{
         try{
             const {sujetid} = req.body;
-            const tmp = await users.getThread(sujetid);
+            const tmp = await forum.getThread(sujetid);
             if (tmp===null){
                 res.status(404).json({
                     status: 404,
-                    message: "Thread existant"
+                    message: "Thread inexistant"
                 });
             }
             else{
-                res.send(tmp);
+                res.status(200).send(tmp);
             }
 
         }catch(e){
             res.status(500).send(e);
+        }
+    });
+    router.post("/user/postforum", async (req, res) =>{
+        try{
+            const {titre,description,date,userid,userpseudo} = req.body;
+            const tmp = await forum.createCategories(titre,description,date,userid,userpseudo);
+            if(tmp){
+                res.status(200).json({
+                status: 200,
+                message: "Créaction d'un sujet"
+                });
+            }else{
+                res.status(404).json({
+                status: 404,
+                message: "Erreur de créaction"
+                });
+            }
+        }catch (e) {
+            console.error("Erreur dans /user/postforum :", e);
+            res.status(500).json({ error: e.message });
         }
     });
     return router;

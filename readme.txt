@@ -11,3 +11,8 @@
 -AdminPanel
 -Profile
 -log out
+
+Sujet :
+    ID, Titre , date , user_id, user_pseudo
+thread :
+    Id , sujet_id,description , date, user_id, user_pseudo, message:

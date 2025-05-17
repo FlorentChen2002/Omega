@@ -35,7 +35,7 @@ function Signup(props) {
     } else {
       try {
         const response = await axios.post('http://localhost:8000/api/user/register', {
-          login: pseudo, password: password1,date: new Date().toLocaleDateString('fr-FR'),rang: "users" // Corps de la requête : { "texte": valeur du champ }
+          login: pseudo, password: password1,date: new Date().toLocaleDateString('fr-FR'),rang: "users"
         });
         setPassRegister(true);
         // Affiche la réponse reçue du serveur
@@ -104,7 +104,7 @@ function Signup(props) {
       </div>
       <div className="sign-up-link">
         <p>
-          Vous avez déjà un compte ?<Link to="/login">Connexion</Link>
+          Vous avez déjà un compte ?<Link to="/login"> Connexion</Link>
         </p>
       </div>
     </form>
