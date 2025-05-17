@@ -65,6 +65,20 @@ class Users {
             }
           });
     }
+    deleteUser(userid){
+      return new Promise(async(resolve, reject) => {
+        try {
+          const newUserid= new ObjectId(userid) ;
+          const result = await this.db.collection('LoginDB').deleteOne({ _id:newUserid});
+          if (result.deletedCount === 0) {
+            return resolve(false);
+          }
+          resolve(true);//supprimer avec succes
+        } catch (err) {
+          reject(false);
+        }
+      });
+    }
   
   }
   

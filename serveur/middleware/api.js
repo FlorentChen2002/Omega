@@ -179,6 +179,22 @@ function init(db) {
                 .catch((err) => res.status(500).send(err));
         }
     });
+    router.delete("/user/delete/user", async (req, res) =>{
+        const { id } = req.body;
+        if (!id) {
+            res.status(400).json({ status: 400, message: "ID de l'utilasteur manquant" });
+        }
+        try {
+            const deleted = await users.deleteUser(id);
+            if (!deleted) {
+                res.status(404).json({ status: 404, message: "User non trouvé" });
+            }
+
+            res.status(200).json({ status: 200, message: "User supprimé" });
+        } catch (err) {
+            res.status(500).json({error: err.message });
+        }
+    });
 
     const forum = new Forum.default(db);
     router.get("/user/forum/sujet", async (req, res) =>{
