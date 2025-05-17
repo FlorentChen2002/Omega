@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { Outlet,useLocation } from "react-router-dom";
 
-const LayoutForum = ({user}) => {
+const LayoutForum = () => {
     return (
         <Outlet/>
     );

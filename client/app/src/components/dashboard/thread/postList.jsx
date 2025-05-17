@@ -8,7 +8,7 @@ const PostList = ({ sujet,commentaires, user }) => {
       <h1>Commentaire :</h1>
       {commentaires.map((commentaire) => (
         <Commentaire
-          key={commentaire.id}
+          key={commentaire._id}
           sujet={sujet}
           commentaire={commentaire}
           user={user}

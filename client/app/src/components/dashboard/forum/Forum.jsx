@@ -5,70 +5,44 @@ import "./styles.css";
 
 function Forum({ user }) {
     // État initial
-    const [threads, setThreads] = useState([
-        {
-            id: 1,
-            title: "Pourquoi React est génial ?",
-            author: "Alice",
-            date: "03/05/2025",
-            replies: 3
-        },
-        {
-            id: 2,
-            title: "Les hooks React",
-            author: "Bob",
-            date: "04/05/2025",
-            replies: 5
-        },
-        {
-            id: 3,
-            title: "React vs Vue",
-            author: "Charlie",
-            date: "05/05/2025",
-            replies: 2
-        },
-    ]);
+    const [sujets, setSujets] = useState([]);
 
     const navigate = useNavigate();
 
     // Effets
-    useEffect(async() => {
-        document.body.classList.add("forum");
+    const getAllSujet = async() =>{
         try {
-            const response = await axios.get('http://localhost:8000/api/user/forum');
-            if (response.data.status==200){
-                console.log(response)
+            const response = await axios.get('http://localhost:8000/api/user/forum/sujet');
+            if (response.status==200){
+                setSujets(response.data);
             }
         }catch(e){
             console.error("Erreur lors de l'envoi de la requête :", e);
         }
+    }
+    useEffect(() => {
+        document.body.classList.add("forum");
+        getAllSujet();
         return () => {
             document.body.classList.remove("forum");
         };
     }, []);
-
-    // Gestion du clic sur un thread
-    const handleThreadClick = (threadId) => {
-        console.log("change de page");
-    };
-
     // Rendu
     return (
         <div className="forum-container">
             <main>
-                {threads.map((thread) => (
+                {sujets.map((sujet) => (
                     <div 
                         className="post-link" 
-                        key={thread.id}
-                        onClick={() => handleThreadClick(thread.id)}
+                        key={sujet._id}
+                        onClick={() => navigate("/forum/sujet",{ state: { sujet } })}
                         role="button"
                         tabIndex={0}
                     >
                         <div className="post-forum">
-                            <h3>{thread.title}</h3>
-                            <span className="replies-forum">{thread.replies} 回复</span>
+                            <h3>{sujet.titre}</h3>
                             <p>
-                                - 发布者: {thread.author} - 时间: {thread.date}
+                                - 发布者: {sujet.user_pseudo} - 时间: {sujet.date}
                             </p>
                         </div>
                     </div>

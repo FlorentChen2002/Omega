@@ -20,9 +20,10 @@ function App() {
       const response = await axios.get('http://localhost:8000/api/user/me', {
         withCredentials: true
       });
-      console.log(response.data[0]);
-      setUser(response.data[0]);
-      setIsLoading(true);
+      if(response.data){
+        setUser(response.data);
+        setIsLoading(true);
+      }
     } catch (error) {
       setIsLoading(false);
     }

@@ -26,18 +26,15 @@ class Users {
   
     get(userid) {
       return new Promise(async(resolve, reject) => {
-        const new_userid = new ObjectId(userid)
-        const user = await this.db.collection('LoginDB').find({_id:new_userid}).toArray();
-        //console.log(user)
-        if(false) {
-          //erreur
-          reject();
+        if (!ObjectId.isValid(userid)) {
+          return reject(new Error("Invalid userid format"));
+        }
+        const new_userid = new ObjectId(userid);
+        const user = await this.db.collection('LoginDB').findOne({_id: new_userid});
+        if (user) {
+          resolve(user);
         } else {
-          if(user.length == 1) {
-            resolve(user);
-          } else {
-            resolve(null);
-          }
+          resolve(null);
         }
       });
     }

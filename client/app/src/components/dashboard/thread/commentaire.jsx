@@ -4,25 +4,23 @@ import "./styles.css";
 
 function Commentaire({ sujet, commentaire, user }) {
   const [showForm, setShowForm] = useState(false);
-  const [showRepond, setShowRepond] = useState(false);
-  if (commentaire.repond.length > 0) {
-    setShowRepond(true);
-  }
+  //const [showRepond, setShowRepond] = useState(false);
+  const showRepond = commentaire.repond[0].content;
   return (
     <div className="commentaire-body">
       <div className="commentaire-meta">
-        <span className="author">{commentaire.pseudo}</span>
+        <span className="author">{commentaire.user_pseudo}</span>
 
         <span className="meta">{commentaire.date}</span>
       </div>
-      <p>{commentaire.commentaire}</p>
+      <p>{commentaire.content}</p>
       {showRepond && (
         <div className="reply-block">
           <div className="commentaire-meta">
-            <span className="author">{commentaire.repond.pseudo}</span>
-            <span className="meta">{commentaire.repond.date}</span>
+            <span className="author">{commentaire.repond[0].user_pseudo}</span>
+            <span className="meta">{commentaire.repond[0].date}</span>
           </div>
-          <p>{commentaire.repond.commentaire}</p>
+          <p>{commentaire.repond[0].content}</p>
         </div>
       )}
       <div className="commentaire-actions">

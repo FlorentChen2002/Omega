@@ -25,7 +25,6 @@ function PostForum({ user }) {
                 titre:titre,description:contenu,date:new Date().toLocaleString('fr-FR'),userid:user._id,userpseudo:user.pseudo
             });
             if (response.data.status==200){
-                console.log("création du sujet");
                 setTitre("");
                 setContenu("");
                 navigate("/")

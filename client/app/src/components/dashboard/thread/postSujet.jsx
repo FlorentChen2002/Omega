@@ -20,7 +20,7 @@ function PostSujet({ user, sujet }) {
         {sujet.pseudo} · {sujet.date}
       </p>
 
-      <p className="article-text">{sujet.commentaire}</p>
+      <p className="article-text">{sujet.description}</p>
 
       <div className="commentaire-actions">
         <span onClick={handleClick}>💬 Répondre</span>

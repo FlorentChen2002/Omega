@@ -6,13 +6,6 @@ class Forum{
   }
   createCategories(titre,description,date,userid,userpseudo){
     return new Promise(async(resolve, reject) => {
-      console.log("Insertion MongoDB avec :", {
-  titre,
-  description,
-  date,
-  userid,
-  userpseudo
-});
       const tmp = await this.db.collection("ForumDB").insertOne({
         titre: titre,
         description:description,
@@ -20,8 +13,8 @@ class Forum{
         user_id:userid,
         user_pseudo:userpseudo,
       });
-      const tmp2 = await this.db.collection("ForumDB").find({}).toArray();
-      console.log(tmp2);
+      //const tmp2 = await this.db.collection("ForumDB").find({}).toArray();
+      //console.log(tmp2);
       if(tmp.acknowledged) {
         resolve(tmp.insertedId);
       } else {
@@ -49,18 +42,11 @@ class Forum{
       }
     });
   }
-  getAllSujet(){
-    return new Promise(async(resolve, reject) => {
-      const count = await this.db.collection('ForumDB').find({}).toArray();
-      resolve(count);
-    });
+  async getAllSujet(){
+    return await this.db.collection('ForumDB').find({}).toArray();
   }
-  getThread(sujetid){
-    return new Promise(async(resolve, reject) => {
-      const new_sujetid = new ObjectId(sujetid)
-      const count = await this.db.collection('PostDB').find({sujet_id:new_sujetid}).toArray();
-        resolve(count);
-    });
+  async getThread(sujetid){
+    return await this.db.collection('ThreadDB').find({sujet_id:sujetid}).toArray();
   }
 }
   exports.default = Forum;

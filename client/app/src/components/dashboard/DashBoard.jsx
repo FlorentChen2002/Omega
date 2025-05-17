@@ -8,7 +8,6 @@ import Principale from "./thread/principale";
 
 function DashBoard({users}) {//verification de connexion
   //affichage
-  console.log(users);
   return (
     <Routes> 
       <Route path="/" element={<Layout user={users} />}>

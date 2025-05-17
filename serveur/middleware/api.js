@@ -137,7 +137,7 @@ function init(db) {
         }
         try{
             const user = await users.get(req.session.userid);
-            console.log(user)
+            console.log("Connexion",user)
             if (!user){
                 return res.status(404).json({
                     status: 404,
@@ -181,9 +181,10 @@ function init(db) {
     });
 
     const forum = new Forum.default(db);
-    router.get("/user/forum", async (req, res) =>{
+    router.get("/user/forum/sujet", async (req, res) =>{
         try{
             const tmp = await forum.getAllSujet();
+            console.log(tmp);
             if (tmp===null){
                 res.status(404).json({
                     status: 404,
@@ -198,10 +199,13 @@ function init(db) {
             res.status(500).send(e);
         }
     });
-    router.get("/user/forum/get", async (req, res) =>{
+    router.get("/user/forum/thread", async (req, res) =>{
+        console.log("je cherche lol");
         try{
-            const {sujetid} = req.body;
+            const sujetid = req.query.sujetid;
+            console.log("id",sujetid);
             const tmp = await forum.getThread(sujetid);
+            console.log(tmp);
             if (tmp===null){
                 res.status(404).json({
                     status: 404,
@@ -224,6 +228,26 @@ function init(db) {
                 res.status(200).json({
                 status: 200,
                 message: "Créaction d'un sujet"
+                });
+            }else{
+                res.status(404).json({
+                status: 404,
+                message: "Erreur de créaction"
+                });
+            }
+        }catch (e) {
+            console.error("Erreur dans /user/postforum :", e);
+            res.status(500).json({ error: e.message });
+        }
+    });
+    router.post("/user/forum/post", async (req, res) =>{
+        try{
+            const {sujetid,content,userid,userpseudo,date,repond} = req.body;
+            const tmp = await forum.createThreads(sujetid,content,userid,userpseudo,date,repond);
+            if(tmp){
+                res.status(200).json({
+                status: 200,
+                message: "Créaction d'un thread"
                 });
             }else{
                 res.status(404).json({
