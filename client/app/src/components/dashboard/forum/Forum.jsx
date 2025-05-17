@@ -42,7 +42,7 @@ function Forum({ user }) {
                         <div className="post-forum">
                             <h3>{sujet.titre}</h3>
                             <p>
-                                - 发布者: {sujet.user_pseudo} - 时间: {sujet.date}
+                                - Auteur: {sujet.user_pseudo} - Posté: {sujet.date}
                             </p>
                         </div>
                     </div>

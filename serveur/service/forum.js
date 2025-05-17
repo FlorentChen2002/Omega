@@ -46,6 +46,29 @@ class Forum{
   async getThread(sujetid){
     return await this.db.collection('ThreadDB').find({sujet_id:sujetid}).toArray();
   }
+  deleteSujet(sujetid){
+    return new Promise(async(resolve, reject) => {
+      try {
+        const newSujetid= new ObjectId(sujetid) ;
+        const result = await this.db.collection('ForumDB').deleteOne({ _id:newSujetid});
+        if (result.deletedCount === 0) {
+          return resolve(false);
+        }
+        const recherche = await this.db.collection('ThreadDB').find({sujet_id:sujetid}).toArray();
+        if(recherche.length===0){
+          resolve(true);
+        } else {
+          const result2 = await this.db.collection('ThreadDB').deleteMany({sujet_id:sujetid});
+          if (result2.deletedCount === 0) {
+            return resolve(false);
+          }
+          resolve(true);//supprimer avec succes
+        }
+      } catch (err) {
+        reject(false);
+    }
+    });
+  }
   deleteThread(threadid){
     return new Promise(async(resolve, reject) => {
       try {

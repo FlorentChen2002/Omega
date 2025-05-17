@@ -1,7 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import DeleteForum from "./deleteForum";
 import "./styles.css";
 
 function PostSujet({ user, sujet }) {
+  const [showDeleteComposant, setShowDeleteComposant] = useState(false);
+  const showDelete = true;
+  console.log(sujet);
   useEffect(() => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -25,6 +29,8 @@ function PostSujet({ user, sujet }) {
       <div className="commentaire-actions">
         <span onClick={handleClick}>💬 Répondre</span>
         <span>🚩 Signaler</span>
+        {showDelete && <span onClick={() => setShowDeleteComposant(true)} >🗑️ Supprimer</span>}
+        {showDeleteComposant && <DeleteForum commentaire={sujet} query="sujet"/>}
       </div>
     </div>
   );

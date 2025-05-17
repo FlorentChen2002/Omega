@@ -290,8 +290,24 @@ function init(db) {
             res.status(500).json({ error: e.message });
         }
     });
-
     router.delete("/user/forum/delete/sujet", async (req, res) =>{
+        const { id } = req.body;
+        console.log(id);
+        if (!id) {
+            res.status(400).json({ status: 400, message: "ID du sujet manquant" });
+        }
+        try {
+            const deleted = await forum.deleteSujet(id);
+            if (!deleted) {
+                res.status(404).json({ status: 404, message: "Sujet non trouvé" });
+            }
+
+            res.status(200).json({ status: 200, message: "Sujet supprimé" });
+        } catch (err) {
+            res.status(500).json({error: err.message });
+        }
+    });
+    router.delete("/user/forum/delete/thread", async (req, res) =>{
         const { id } = req.body;
         console.log(id);
         if (!id) {

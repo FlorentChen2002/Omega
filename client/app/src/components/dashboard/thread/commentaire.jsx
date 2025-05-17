@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NewPostForm from "./NewPostForm";
-import DeleteThread from "./deleteThread";
+import DeleteForum from "./deleteForum";
 import "./styles.css";
 
 function Commentaire({ sujet, commentaire, user }) {
@@ -31,7 +31,7 @@ function Commentaire({ sujet, commentaire, user }) {
         <span onClick={() => setShowForm(!showForm)}>💬 Répondre</span>
         <span>🚩 Signaler</span>
         {showDelete && <span onClick={() => setShowDeleteComposant(true)} >🗑️ Supprimer</span>}
-        {showDeleteComposant && <DeleteThread commentaire={commentaire}/>}
+        {showDeleteComposant && <DeleteForum commentaire={commentaire} query="thread"/>}
       </div>
       {showForm && <NewPostForm user={user} sujet={sujet} commentaire={commentaire}/>}
     </div>
