@@ -8,7 +8,9 @@ function PostForum({ user }) {
     //state
     const [titre, setTitre] = useState("");
     const [contenu, setContenu] = useState("");
+    const [prive, setPrive] = useState(false);
     const navigate = useNavigate();
+    const showPrive = user.rang.toString()==="admin";
 
     //comportement
     const getTitre = (evt) => {
@@ -17,12 +19,14 @@ function PostForum({ user }) {
     const getContenu = (evt) => {
         setContenu(evt.target.value);
     };
-
+    const handleChange = (evt) => {
+        setPrive(evt.target.checked);
+    }
     const submissionHandler = async(evt) => {
         evt.preventDefault();
         try {
             const response = await axios.post('http://localhost:8000/api/user/postforum', {
-                titre:titre,description:contenu,date:new Date().toLocaleString('fr-FR'),userid:user._id,userpseudo:user.pseudo
+                titre:titre,description:contenu,date:new Date().toLocaleString('fr-FR'),userid:user._id,userpseudo:user.pseudo,private:prive
             });
             if (response.data.status==201){
                 setTitre("");
@@ -54,6 +58,7 @@ function PostForum({ user }) {
                     onChange={getContenu}
                     required
                 />
+                { showPrive && <label className="meta"><input type="checkbox" value={prive} onChange={handleChange}/>Privé pour les admins</label>}
                 <button className="Post-forum-button" onClick={submissionHandler}>
                 Poster
                 </button>

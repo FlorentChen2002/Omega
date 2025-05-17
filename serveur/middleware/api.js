@@ -238,9 +238,9 @@ function init(db) {
     });
     router.post("/user/postforum", async (req, res) =>{
         try{
-            const {titre,description,date,userid,userpseudo} = req.body;
+            const {titre,description,date,userid,userpseudo,private} = req.body;
             if( titre && description && date && userid && userpseudo ){
-                const tmp = await forum.createCategories(titre,description,date,userid,userpseudo);
+                const tmp = await forum.createCategories(titre,description,date,userid,userpseudo,private);
                 if(tmp){
                     res.status(201).json({
                     status: 201,

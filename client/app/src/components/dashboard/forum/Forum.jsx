@@ -31,22 +31,27 @@ function Forum({ user }) {
     return (
         <div className="forum-container">
             <main>
-                {sujets.map((sujet) => (
-                    <div 
-                        className="post-link" 
-                        key={sujet._id}
-                        onClick={() => navigate("/forum/sujet",{ state: { sujet } })}
-                        role="button"
-                        tabIndex={0}
-                    >
-                        <div className="post-forum">
-                            <h3>{sujet.titre}</h3>
-                            <p>
-                                - Auteur: {sujet.user_pseudo} - Posté: {sujet.date}
-                            </p>
+                { sujets.map((sujet) => {
+                    const showSujet = !sujet.prive || user.rang?.toString() === "admin";
+                    if (!showSujet) return null;
+
+                    return (
+                        <div 
+                            className="post-link" 
+                            key={sujet._id}
+                            onClick={() => navigate("/forum/sujet", { state: { sujet } })}
+                            role="button"
+                            tabIndex={0}
+                        >
+                            <div className="post-forum">
+                                <h3>{sujet.titre}</h3>
+                                <p>
+                                    - Auteur: {sujet.user_pseudo} - Posté: {sujet.date}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </main>
         </div>
         

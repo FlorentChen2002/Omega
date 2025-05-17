@@ -4,8 +4,8 @@ import "./styles.css";
 
 function PostSujet({ user, sujet }) {
   const [showDeleteComposant, setShowDeleteComposant] = useState(false);
-  const showDelete = true;
-  console.log(sujet);
+  const showDelete = user._id.toString()===sujet.user_id.toString() || user.rang.toString()==="admin";
+
   useEffect(() => {
     window.scrollTo({
       top: document.body.scrollHeight,

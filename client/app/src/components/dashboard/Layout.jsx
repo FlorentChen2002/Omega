@@ -12,20 +12,20 @@ const Layout = ({user}) => {
     }, []);
     return (
         <div>
-        <header className="header">
-            <h1>Forum</h1>
-            <div className="nav-links">
-            <a href="#">首页</a>
-            <a href="#">WebApproach</a>
-            <a href="#">Github</a>
+            <header className="header">
+                <h1>Forum</h1>
+                <div className="nav-links">
+                <a href="#">首页</a>
+                <a href="#">WebApproach</a>
+                <a href="https://github.com/FlorentChen2002/Omega">Github</a>
+                </div>
+            </header>
+            <div className="container">
+                <Header />
+                <div className="content">
+                    <Outlet />
+                </div>
             </div>
-        </header>
-        <div className="container">
-            <Header />
-            <div className="content">
-            <Outlet />
-            </div>
-        </div>
         </div>
     );
 };

@@ -4,7 +4,7 @@ class Forum{
     this.db = db
     // suite plus tard avec la BD
   }
-  createCategories(titre,description,date,userid,userpseudo){
+  createCategories(titre,description,date,userid,userpseudo,prive){
     return new Promise(async(resolve, reject) => {
       const tmp = await this.db.collection("ForumDB").insertOne({
         titre: titre,
@@ -12,6 +12,7 @@ class Forum{
         date: date,
         user_id:userid,
         user_pseudo:userpseudo,
+        prive:prive,
       });
       //const tmp2 = await this.db.collection("ForumDB").find({}).toArray();
       //console.log(tmp2);
