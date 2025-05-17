@@ -7,7 +7,6 @@ class Users {
   
     create(login, password, date, rang) {
       return new Promise(async(resolve, reject) => {
-        console.log()
         const tmp = await this.db.collection("LoginDB").insertOne({
           pseudo: login,
           mdp: password,

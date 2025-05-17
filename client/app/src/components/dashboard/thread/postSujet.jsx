@@ -17,7 +17,7 @@ function PostSujet({ user, sujet }) {
     <div className="main-content">
       <h2>{sujet.titre}</h2>
       <p className="meta">
-        {sujet.pseudo} · {sujet.date}
+        {sujet.user_pseudo} · {sujet.date}
       </p>
 
       <p className="article-text">{sujet.description}</p>

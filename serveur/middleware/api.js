@@ -223,16 +223,23 @@ function init(db) {
     router.post("/user/postforum", async (req, res) =>{
         try{
             const {titre,description,date,userid,userpseudo} = req.body;
-            const tmp = await forum.createCategories(titre,description,date,userid,userpseudo);
-            if(tmp){
-                res.status(200).json({
-                status: 200,
-                message: "Créaction d'un sujet"
-                });
-            }else{
+            if( titre && description && date && userid && userpseudo ){
+                const tmp = await forum.createCategories(titre,description,date,userid,userpseudo);
+                if(tmp){
+                    res.status(201).json({
+                    status: 201,
+                    message: "Créaction d'un sujet"
+                    });
+                }else{
+                    res.status(401).json({
+                    status: 401,
+                    message: "Erreur de créaction"
+                    });
+                }
+            } else {
                 res.status(404).json({
-                status: 404,
-                message: "Erreur de créaction"
+                    status: 404,
+                    message: "Manque des données"
                 });
             }
         }catch (e) {
@@ -243,21 +250,47 @@ function init(db) {
     router.post("/user/forum/post", async (req, res) =>{
         try{
             const {sujetid,content,userid,userpseudo,date,repond} = req.body;
-            const tmp = await forum.createThreads(sujetid,content,userid,userpseudo,date,repond);
-            if(tmp){
-                res.status(200).json({
-                status: 200,
-                message: "Créaction d'un thread"
-                });
-            }else{
-                res.status(404).json({
-                status: 404,
-                message: "Erreur de créaction"
+            if(sujetid && content && userid && userpseudo && date){
+                const tmp = await forum.createThreads(sujetid,content,userid,userpseudo,date,repond);
+                if(tmp){
+                    res.status(201).json({
+                    status: 201,
+                    message: "Créaction d'un thread"
+                    });
+                }else{
+                    res.status(404).json({
+                    status: 404,
+                    message: "Erreur de créaction"
+                    });
+                }
+            } else {
+                res.status(400).json({
+                    status: 400,
+                    message: "Manque des données"
                 });
             }
         }catch (e) {
             console.error("Erreur dans /user/postforum :", e);
             res.status(500).json({ error: e.message });
+        }
+    });
+
+    router.delete("/user/forum/delete/sujet", async (req, res) =>{
+        const { id } = req.body;
+        console.log(id);
+        if (!id) {
+            res.status(400).json({ status: 400, message: "ID du sujet manquant" });
+        }
+        try {
+            const deleted = await forum.deleteThread(id);
+            console.log(deleted);
+            if (!deleted) {
+                res.status(404).json({ status: 404, message: "Sujet non trouvé" });
+            }
+
+            res.status(200).json({ status: 200, message: "Sujet supprimé" });
+        } catch (err) {
+            res.status(500).json({error: err.message });
         }
     });
     return router;

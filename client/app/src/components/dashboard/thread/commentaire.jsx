@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import NewPostForm from "./NewPostForm";
+import DeleteThread from "./deleteThread";
 import "./styles.css";
 
 function Commentaire({ sujet, commentaire, user }) {
   const [showForm, setShowForm] = useState(false);
+  const [showDeleteComposant, setShowDeleteComposant] = useState(false);
   //const [showRepond, setShowRepond] = useState(false);
   const showRepond = commentaire.repond[0].content;
+  const showDelete = user._id.toString()===commentaire.user_id.toString() || user.rang.toString()==="admin";
+  console.log(user._id.toString(),commentaire.user_id.toString(), showDelete);
   return (
     <div className="commentaire-body">
       <div className="commentaire-meta">
@@ -26,6 +30,8 @@ function Commentaire({ sujet, commentaire, user }) {
       <div className="commentaire-actions">
         <span onClick={() => setShowForm(!showForm)}>💬 Répondre</span>
         <span>🚩 Signaler</span>
+        {showDelete && <span onClick={() => setShowDeleteComposant(true)} >🗑️ Supprimer</span>}
+        {showDeleteComposant && <DeleteThread commentaire={commentaire}/>}
       </div>
       {showForm && <NewPostForm user={user} sujet={sujet} commentaire={commentaire}/>}
     </div>

@@ -22,10 +22,8 @@ class Forum{
       }
     });
   }
-
   createThreads(sujetid,content,userid,userpseudo,date,repond){
     return new Promise(async(resolve, reject) => {
-      console.log()
       const tmp = await this.db.collection("ThreadDB").insertOne({
 
         sujet_id:sujetid,
@@ -47,6 +45,22 @@ class Forum{
   }
   async getThread(sujetid){
     return await this.db.collection('ThreadDB').find({sujet_id:sujetid}).toArray();
+  }
+  deleteThread(threadid){
+    return new Promise(async(resolve, reject) => {
+      try {
+        const newThreadid= new ObjectId(threadid) ;
+        //const tmp =await this.db.collection('ThreadDB').find({_id:newThreadid}).toArray();
+        //console.log(tmp);
+        const result = await this.db.collection('ThreadDB').deleteOne({ _id:newThreadid});
+        if (result.deletedCount === 0) {
+          return resolve(false);
+        }
+        resolve(true);//supprimer avec succes
+      } catch (err) {
+        reject(false);
+    }
+    });
   }
 }
   exports.default = Forum;
