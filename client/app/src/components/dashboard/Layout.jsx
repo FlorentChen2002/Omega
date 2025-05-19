@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
 import React, { useEffect } from "react";
+import Header from "./Header";
+import Deconnexion from "./deconnexion/Deconnexion";
 import "./forum/styles.css";
 
 const Layout = ({user}) => {
@@ -15,9 +16,9 @@ const Layout = ({user}) => {
             <header className="header">
                 <h1>Forum</h1>
                 <div className="nav-links">
-                <a href="#">首页</a>
-                <a href="#">WebApproach</a>
-                <a href="https://github.com/FlorentChen2002/Omega">Github</a>
+                    <a href="#">Vidéo</a>
+                    <a href="https://github.com/FlorentChen2002/Omega">Github  </a>
+                    <Deconnexion/>
                 </div>
             </header>
             <div className="container">
@@ -26,6 +27,7 @@ const Layout = ({user}) => {
                     <Outlet />
                 </div>
             </div>
+
         </div>
     );
 };

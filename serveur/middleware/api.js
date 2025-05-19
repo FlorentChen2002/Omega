@@ -16,7 +16,7 @@ function init(db) {
         next();
     });
     const users = new Users.default(db);
-    router.post("/user/login", async (req, res) => {
+    router.post("/user/login", async (req, res) => {//connexion
         try {
             const { login, password } = req.body;
             // Erreur sur la requête HTTP
@@ -74,7 +74,7 @@ function init(db) {
         }
     });
 
-    router.post("/user/register", async (req, res) =>{
+    router.post("/user/register", async (req, res) =>{//s'inscrire
         try{
             const { login, password, date, rang } = req.body;
             if (!login || !password) {
@@ -128,7 +128,7 @@ function init(db) {
             });
         }
     });
-    router.get("/user/me", async(req,res) =>{
+    router.get("/user/me", async(req,res) =>{//obtenir les données de lui meme
         if(!req.session.userid){
             return res.status(401).json({
                 status: 401,
@@ -137,7 +137,6 @@ function init(db) {
         }
         try{
             const user = await users.get(req.session.userid);
-            console.log("Connexion",user)
             if (!user){
                 return res.status(404).json({
                     status: 404,
@@ -145,6 +144,56 @@ function init(db) {
                 });
             }
             res.json(user);
+        }catch(e){
+            res.status(500).json({
+                status: 500,
+                message: "erreur interne",
+                details: (e || "Erreur inconnue").toString()
+            });
+        };
+    });
+    router.post("/user/logout", (req, res) => { //deconnexion
+        console.log(req.session.userid);
+        console.log(req.session);
+        if (!req.session.userid) {
+            return res.status(401).json({
+                status: 401,
+                message: "Non authentifié"
+            });
+        }
+
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({
+                    status: 500,
+                    message: "Erreur lors de la déconnexion"
+                });
+            }
+
+            res.clearCookie("connect.sid"); // supprimer les cookieS
+            return res.status(200).json({
+                status: 200,
+                message: "Déconnexion réussie"
+            });
+        });
+    })
+    router.get("/user/userid", async(req,res) =>{//obtenir les donnees du user_id
+        const userid = req.query.userid;
+        if(!userid){
+            return res.status(401).json({
+                status: 401,
+                message: "Non authentifié"
+            });
+        }
+        try{
+            const user = await users.get(userid);
+            if (!user){
+                return res.status(404).json({
+                    status: 404,
+                    message: "utilisateur non trouvé"
+                });
+            }
+            res.status(200).json(user);
         }catch(e){
             res.status(500).json({
                 status: 500,
@@ -179,7 +228,7 @@ function init(db) {
                 .catch((err) => res.status(500).send(err));
         }
     });
-    router.delete("/user/delete/user", async (req, res) =>{
+    router.delete("/user/delete/user", async (req, res) =>{//supprimer un utilisateur de la base donnee LoginDB
         const { id } = req.body;
         if (!id) {
             res.status(400).json({ status: 400, message: "ID de l'utilasteur manquant" });
@@ -197,7 +246,7 @@ function init(db) {
     });
 
     const forum = new Forum.default(db);
-    router.get("/user/forum/sujet", async (req, res) =>{
+    router.get("/user/forum/sujet", async (req, res) =>{//obtenir toutes les sujets
         try{
             const tmp = await forum.getAllSujet();
             console.log(tmp);
@@ -215,11 +264,26 @@ function init(db) {
             res.status(500).send(e);
         }
     });
-    router.get("/user/forum/thread", async (req, res) =>{
-        console.log("je cherche lol");
+    router.get("/user/forum/allthread", async (req, res) =>{//obtenir toutes les threads
+        try{
+            const tmp = await forum.getAllThread();
+            if (tmp===null){
+                res.status(404).json({
+                    status: 404,
+                    message: "Aucun thread"
+                });
+            }
+            else{
+                res.status(200).send(tmp);
+            }
+
+        }catch(e){
+            res.status(500).send(e);
+        }
+    });
+    router.get("/user/forum/thread", async (req, res) =>{//obtenir un thread specifique
         try{
             const sujetid = req.query.sujetid;
-            console.log("id",sujetid);
             const tmp = await forum.getThread(sujetid);
             console.log(tmp);
             if (tmp===null){
@@ -236,7 +300,7 @@ function init(db) {
             res.status(500).send(e);
         }
     });
-    router.post("/user/postforum", async (req, res) =>{
+    router.post("/user/postforum", async (req, res) =>{//creation d un sujet
         try{
             const {titre,description,date,userid,userpseudo,private} = req.body;
             if( titre && description && date && userid && userpseudo ){
@@ -263,7 +327,7 @@ function init(db) {
             res.status(500).json({ error: e.message });
         }
     });
-    router.post("/user/forum/post", async (req, res) =>{
+    router.post("/user/forum/post", async (req, res) =>{//creation d un thread
         try{
             const {sujetid,content,userid,userpseudo,date,repond} = req.body;
             if(sujetid && content && userid && userpseudo && date){
@@ -290,7 +354,7 @@ function init(db) {
             res.status(500).json({ error: e.message });
         }
     });
-    router.delete("/user/forum/delete/sujet", async (req, res) =>{
+    router.delete("/user/forum/delete/sujet", async (req, res) =>{// supprimer un sujet + les commentaires qui va avec
         const { id } = req.body;
         console.log(id);
         if (!id) {
@@ -307,7 +371,7 @@ function init(db) {
             res.status(500).json({error: err.message });
         }
     });
-    router.delete("/user/forum/delete/thread", async (req, res) =>{
+    router.delete("/user/forum/delete/thread", async (req, res) =>{// supprimer un commentaire/thread
         const { id } = req.body;
         console.log(id);
         if (!id) {

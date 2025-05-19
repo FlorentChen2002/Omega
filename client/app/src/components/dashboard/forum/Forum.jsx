@@ -6,7 +6,6 @@ import "./styles.css";
 function Forum({ user }) {
     // État initial
     const [sujets, setSujets] = useState([]);
-
     const navigate = useNavigate();
 
     // Effets

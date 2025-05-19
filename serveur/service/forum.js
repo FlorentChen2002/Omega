@@ -47,6 +47,9 @@ class Forum{
   async getThread(sujetid){
     return await this.db.collection('ThreadDB').find({sujet_id:sujetid}).toArray();
   }
+  async getAllThread(){
+    return await this.db.collection('ThreadDB').find({}).toArray();
+  }
   deleteSujet(sujetid){
     return new Promise(async(resolve, reject) => {
       try {

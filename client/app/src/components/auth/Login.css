@@ -10,7 +10,7 @@ body.login {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #dfdfdf;
+  background: #dadce083;
 }
 .login-box {
   display: flex;

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import DeleteForum from "./deleteForum";
 import "./styles.css";
@@ -5,7 +6,8 @@ import "./styles.css";
 function PostSujet({ user, sujet }) {
   const [showDeleteComposant, setShowDeleteComposant] = useState(false);
   const showDelete = user._id.toString()===sujet.user_id.toString() || user.rang.toString()==="admin";
-
+  const navigate = useNavigate();
+  const userid =sujet.user_id;
   useEffect(() => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -29,6 +31,7 @@ function PostSujet({ user, sujet }) {
       <div className="commentaire-actions">
         <span onClick={handleClick}>💬 Répondre</span>
         <span>🚩 Signaler</span>
+        <span onClick={() => navigate("/profile", { state: { userid } })}>👤 profile</span>
         {showDelete && <span onClick={() => setShowDeleteComposant(true)} >🗑️ Supprimer</span>}
         {showDeleteComposant && <DeleteForum commentaire={sujet} query="sujet"/>}
       </div>

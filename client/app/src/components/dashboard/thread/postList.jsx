@@ -2,8 +2,7 @@ import React from "react";
 import Commentaire from "./commentaire";
 import "./styles.css";
 
-const PostList = ({ sujet,commentaires, user }) => {
-  console.log("pas ici",showSujet) 
+const PostList = ({ sujet,commentaires, user }) => { 
   return (
     <div className="commentaire">
       <h1>Commentaire :</h1>

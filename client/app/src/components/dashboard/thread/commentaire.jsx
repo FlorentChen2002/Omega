@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import NewPostForm from "./NewPostForm";
 import DeleteForum from "./deleteForum";
@@ -7,9 +8,11 @@ function Commentaire({ sujet, commentaire, user }) {
   const [showForm, setShowForm] = useState(false);
   const [showDeleteComposant, setShowDeleteComposant] = useState(false);
   //const [showRepond, setShowRepond] = useState(false);
+  const navigate = useNavigate();
   const showRepond = commentaire.repond[0].content;
   const showDelete = user._id.toString()===commentaire.user_id.toString() || user.rang.toString()==="admin";
-  console.log(user._id.toString(),commentaire.user_id.toString(), showDelete);
+  const userid=commentaire.user_id;
+  //console.log(user._id.toString(),commentaire.user_id.toString(), showDelete);
   return (
     <div className="commentaire-body">
       <div className="commentaire-meta">
@@ -30,6 +33,7 @@ function Commentaire({ sujet, commentaire, user }) {
       <div className="commentaire-actions">
         <span onClick={() => setShowForm(!showForm)}>💬 Répondre</span>
         <span>🚩 Signaler</span>
+        <span onClick={() => navigate("/profile", { state: { userid } })}>👤 profile</span>
         {showDelete && <span onClick={() => setShowDeleteComposant(true)} >🗑️ Supprimer</span>}
         {showDeleteComposant && <DeleteForum commentaire={commentaire} query="thread"/>}
       </div>

@@ -9,20 +9,17 @@ const Header = () => {
   }
   //affichage
   return (
-    <div className="sidebar">
+    <div className="sidebar-gauche">
         <ul>
           <button className="submitButton" onClick={submissionHandler}> +    Sujet </button>
           <li>
-            <Link to="/">Forum</Link>
-          </li>
-          <li>
-            <Link to="/">Forum</Link>
+            <Link to="/forum">Forum</Link>
           </li>
           <li>
             <Link to="/">Messages</Link>
           </li>
           <li>
-            <Link to="/">Profile</Link>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
             <Link to="/">AdminPanel</Link>
