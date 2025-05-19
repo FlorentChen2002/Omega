@@ -17,12 +17,13 @@ const NewPostForm = ({ user,sujet,commentaire }) => {
         date: commentaire.date
       }] : [];
 
-      await axios.post('http://localhost:8000/api/user/forum/post', {
+      await axios.post('http://localhost:8000/api/forum/post', {
         sujetid: sujet._id,
         content: content,
         userid: user._id,
         userpseudo: user.pseudo,
         date: new Date().toLocaleString('fr-FR'),
+        prive:sujet.prive,
         repond: repondData
       });
       setContent("");

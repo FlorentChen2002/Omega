@@ -1,6 +1,7 @@
 //require ('./service/index_app.js');
 const connectToDB = require ('./middleware/db.js');
-const api = require ('./middleware/api.js');
+const api_user = require ('./middleware/api_user.js');
+const api_forum = require ('./middleware/api_forum.js');
 express = require ('express');
 const app = express();
 const session = require ('express-session');
@@ -23,7 +24,9 @@ app.use(session({
       }
 }));
 connectToDB().then((MongoClient)=> {
-    app.use("/api",api.default(MongoClient));
+    //app.use("/api",api.default(MongoClient));
+    app.use("/api/user", api_user.default(MongoClient));
+    app.use("/api/forum", api_forum.default(MongoClient));
     app.listen(8000,() => {
         console.log("Authentification !");
     });

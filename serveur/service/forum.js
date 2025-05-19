@@ -23,7 +23,7 @@ class Forum{
       }
     });
   }
-  createThreads(sujetid,content,userid,userpseudo,date,repond){
+  createThreads(sujetid,content,userid,userpseudo,date,prive,repond){
     return new Promise(async(resolve, reject) => {
       const tmp = await this.db.collection("ThreadDB").insertOne({
 
@@ -32,6 +32,7 @@ class Forum{
         user_id:userid,
         user_pseudo:userpseudo,
         date: date,
+        prive: prive,
         repond:repond
       });
       if(tmp.acknowledged) {

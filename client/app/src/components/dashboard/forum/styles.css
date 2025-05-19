@@ -167,3 +167,12 @@ body.forum {
   background-color: #4c7daf;
   transform: scale(1.05, 1);
 }
+
+.badge-forum{
+  color: white;
+  background: rgb(31, 89, 114);
+  padding:2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+  border-radius: 4px;
+}

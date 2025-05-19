@@ -5,9 +5,10 @@ import axios from 'axios';
 function DeleteForum({commentaire,query}){
     const called = useRef(false);
     const navigate = useNavigate();
+
     const supprimer = async() =>{
         try {
-            const response = await axios.delete(`http://localhost:8000/api/user/forum/delete/${query}`,{ data: { id: commentaire._id } });
+            const response = await axios.delete(`http://localhost:8000/api/forum/delete/${query}`,{ data: { id: commentaire._id } });
             if (response.status==200){
                 if (query==="sujet"){
                     navigate("/forum");
@@ -20,11 +21,13 @@ function DeleteForum({commentaire,query}){
             console.error("Erreur lors de l'envoi de la requête :", e);
         }
     }
+
     useEffect(() => {
         if (called.current) return;
         called.current = true;
         supprimer();
     }, []);
+
     return null;
 }
 

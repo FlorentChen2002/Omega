@@ -79,6 +79,9 @@ class Users {
         }
       });
     }
+    async getAllUser(){
+      return await this.db.collection('LoginDB').find({}).toArray();
+    }
   
   }
   

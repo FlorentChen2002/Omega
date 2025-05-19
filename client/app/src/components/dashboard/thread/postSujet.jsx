@@ -8,6 +8,7 @@ function PostSujet({ user, sujet }) {
   const showDelete = user._id.toString()===sujet.user_id.toString() || user.rang.toString()==="admin";
   const navigate = useNavigate();
   const userid =sujet.user_id;
+  
   useEffect(() => {
     window.scrollTo({
       top: document.body.scrollHeight,

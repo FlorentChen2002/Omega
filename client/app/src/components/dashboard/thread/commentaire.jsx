@@ -13,6 +13,7 @@ function Commentaire({ sujet, commentaire, user }) {
   const showDelete = user._id.toString()===commentaire.user_id.toString() || user.rang.toString()==="admin";
   const userid=commentaire.user_id;
   //console.log(user._id.toString(),commentaire.user_id.toString(), showDelete);
+
   return (
     <div className="commentaire-body">
       <div className="commentaire-meta">

@@ -25,7 +25,7 @@ function PostForum({ user }) {
     const submissionHandler = async(evt) => {
         evt.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/user/postforum', {
+            const response = await axios.post('http://localhost:8000/api/forum/postforum', {
                 titre:titre,description:contenu,date:new Date().toLocaleString('fr-FR'),userid:user._id,userpseudo:user.pseudo,private:prive
             });
             if (response.data.status==201){

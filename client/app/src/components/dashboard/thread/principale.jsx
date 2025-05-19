@@ -12,7 +12,7 @@ function Principale({user}) {
 
   const getAllThread = async() =>{
     try {
-      const response = await axios.get('http://localhost:8000/api/user/forum/thread',
+      const response = await axios.get('http://localhost:8000/api/forum/thread',
         {params: { sujetid: sujet._id }}
       );
       if (response.status==200){
