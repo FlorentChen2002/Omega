@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "2928e76e-7d60-4463-bcb5-e01ed20e0bdf",
+		"name": "deconnexion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41519106"
+	},
+	"item": [
+		{
+			"name": "deconnexion",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/user/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

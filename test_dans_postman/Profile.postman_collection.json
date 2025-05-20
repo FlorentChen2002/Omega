@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "e96b3946-30f6-499e-bc11-3a7716de8dc6",
+		"name": "Profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41519106"
+	},
+	"item": [
+		{
+			"name": "obtenir tous les utilisateurs",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/user/alluser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"alluser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenir tous les commentaires de l'utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/forum/allthread",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"allthread"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenir les informations d'un utilisateur ",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/user/682c8b4c9a7c2523a0f9edee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"682c8b4c9a7c2523a0f9edee"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

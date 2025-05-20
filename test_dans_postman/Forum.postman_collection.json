@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "9387eef8-f393-4d63-a94d-641b9ff4f9f6",
+		"name": "Forum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41519106"
+	},
+	"item": [
+		{
+			"name": "obtenir tous les topics/sujets",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/forum/sujet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"sujet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creation de topic/sujet",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titre\":\"Test sur postman\",\r\n    \"description\":\"Postman est bien,non ?\",\r\n    \"date\":\"20/05/2025 23:47:49\",\r\n    \"userid\":\"682c8b4c9a7c2523a0f9edee\",\r\n    \"userpseudo\":\"Pomme\",\r\n    \"private\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/forum/postforum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"postforum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenir tous les commentaires du sujet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/forum/thread?sujetid=682cbe7f485725603250fcb1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"thread"
+					],
+					"query": [
+						{
+							"key": "sujetid",
+							"value": "682cbe7f485725603250fcb1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creation d un commentaire",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sujetid\": \"682cbe7f485725603250fcb1\",\r\n    \"content\": \"Salut, je suis d'accord aussi\",\r\n    \"userid\": \"680bd31fa6491295b1d861e1\",\r\n    \"userpseudo\": \"Pomme d'amour\",\r\n    \"date\": \"24/05/2025 20:23:35\",\r\n    \"prive\":false,\r\n    \"repond\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/forum/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "supprimer un commentaire",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"682cfe258f8f19efdd287a59\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/forum/delete/thread",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"delete",
+						"thread"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "supprimer un commentaire inexistant",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"682cfe258f8f19efdd287a59\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/forum/delete/thread",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"delete",
+						"thread"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "supprimer les sujets/topics",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"682cfc588f8f19efdd287a58\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/forum/delete/sujet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"forum",
+						"delete",
+						"sujet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

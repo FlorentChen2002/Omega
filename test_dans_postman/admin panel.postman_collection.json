@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "3c74a825-4b8a-462e-9bc0-f0fa34249977",
+		"name": "admin panel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41519106"
+	},
+	"item": [
+		{
+			"name": "Verifie si tu as les droits admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/rocher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"rocher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "valider l inscription",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/validate/682cf8fc8f8f19efdd287a57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"validate",
+						"682cf8fc8f8f19efdd287a57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "promotion en admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/promote/682cf8fc8f8f19efdd287a57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"promote",
+						"682cf8fc8f8f19efdd287a57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrogradation en rang utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/demote/682cf8fc8f8f19efdd287a57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"demote",
+						"682cf8fc8f8f19efdd287a57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "supprimer un compte",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/admin/refuse/682cf8fc8f8f19efdd287a57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin",
+						"refuse",
+						"682cf8fc8f8f19efdd287a57"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

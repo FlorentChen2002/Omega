@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "0a360704-e3e9-4cdf-b913-89efa23d6fc0",
+		"name": "conversation privee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41519106"
+	},
+	"item": [
+		{
+			"name": "obtenir l'id de l'utilisateur",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/messages_private/current-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"messages_private",
+						"current-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenir laes conversations privees",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"pseudo\": \"Pomme\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/messages_private/conversations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"messages_private",
+						"conversations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtenir les messages privée",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/messages_private/conversations/682c9d8af2a8e25707d19209/messages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"messages_private",
+						"conversations",
+						"682c9d8af2a8e25707d19209",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "s envoyer des messages",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"content\": \"messageInput\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/messages_private/682c9d8af2a8e25707d19209",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"messages_private",
+						"682c9d8af2a8e25707d19209"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
