@@ -9,6 +9,7 @@ import axios from 'axios'; // Importe la bibliothèque Axios pour faire des requ
 import React,{ useState,useEffect } from 'react'; // Importe le hook useState de React pour gérer l'état local
 import AuthRouter from "./components/auth/AuthRouter";
 import DashBoard from "./components/dashboard/DashBoard";
+import Deconnexion from "./components/dashboard/deconnexion/Deconnexion";
 import { BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -35,8 +36,17 @@ function App() {
     setIsLoading(true);
     checkAuth();
   };
-
-  if (isLoading){
+  if(isLoading && !user.status){
+    return (
+      <BrowserRouter>
+        <div style={{ textAlign: "center" }}>
+          <p>Vous êtes inscrit mais en attente d'une validation</p>
+          <Deconnexion/>
+        </div>
+      </BrowserRouter>
+    );
+  }
+  if (isLoading && user.status){
     return (
       <div className="App">
         <BrowserRouter>

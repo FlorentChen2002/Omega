@@ -9,6 +9,7 @@ function Profile({user}) {
   const [users,setUsers] = useState(user);
   const [rang,setRang] = useState(users.rang.toString()==="admin");
   const showPrive = user.rang.toString()==="admin";
+
   const otherUser = async(userid) => {
     try {
       const response = await axios.get(`http://localhost:8000/api/user/${userid}`
@@ -61,7 +62,7 @@ function Profile({user}) {
       <div className="messages">
         <h3>Historique des messages</h3>
         {messages.map((message) => (
-          ((showPrive||message.prive) && <div className="message" key={message._id}>{message.content}
+          ((showPrive||!message.prive) && <div className="message" key={message._id}>{message.content}
             <div className="meta">{message.date}
             </div>
           </div>)

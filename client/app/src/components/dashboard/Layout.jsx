@@ -22,7 +22,7 @@ const Layout = ({user}) => {
                 </div>
             </header>
             <div className="container">
-                <Header />
+                <Header user={user}/>
                 <div className="content">
                     <Outlet />
                 </div>

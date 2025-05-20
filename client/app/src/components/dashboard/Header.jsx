@@ -1,7 +1,7 @@
 import React from "react";
 import { Link,useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({user}) => {
   //comportement
   const navigate = useNavigate();
   const submissionHandler = () =>{
@@ -16,7 +16,7 @@ const Header = () => {
             <Link to="/forum">Forum</Link>
           </li>
           <li>
-            <Link to="/">Messages</Link>
+            <Link to="/conversation">Messages</Link>
           </li>
           <li>
             <Link to="/profile">Profile</Link>
@@ -24,9 +24,9 @@ const Header = () => {
           <li>
             <Link to="/listuser">Utilisateurs</Link>
           </li>
-          <li>
-            <Link to="/">AdminPanel</Link>
-          </li>
+          {(user.rang.toString()==="admin")&&<li>
+            <Link to="/adminpanel">AdminPanel</Link>
+          </li>}
         </ul>
     </div>
   );

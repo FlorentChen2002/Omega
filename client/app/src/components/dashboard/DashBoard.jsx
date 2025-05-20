@@ -5,26 +5,34 @@ import Profile from "./profile/Profile";
 import PostForum from "./forum/PostForum"
 import LayoutForum from "./forum/LayoutForum";
 import ListUser from "./profile/ListUser";
+import AdminUsers from "./adminpage/AdminUsers";
+import ConversationPages from "./message_private/ConversationsPage";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import Principale from "./thread/principale";
 
-function DashBoard({users}) {//verification de connexion
-  //affichage
+function DashBoard({ users }) {
+  if (!users) {
+    return <p>Chargement de l'utilisateur...</p>; // ou un loader
+  }
+
   return (
-    <Routes> 
+    <Routes>
       <Route path="/" element={<Layout user={users} />}>
-      
-        {/* Redirection de "/" vers "/forum" */}
         <Route index element={<Navigate to="/forum" />} />
 
         <Route path="forum" element={<LayoutForum user={users} />}>
           <Route index element={<Forum user={users} />} />
           <Route path="sujet" element={<Principale user={users} />} />
         </Route>
+
         <Route path="postforum" element={<PostForum user={users} />} />
         <Route path="profile" element={<Profile user={users} />} />
-        <Route path="listuser" element={<ListUser/>} />
+        <Route path="listuser" element={<ListUser />} />
+        <Route path="conversation" element={<ConversationPages />} />
+        {users.rang?.toString() === "admin" && (
+          <Route path="adminpanel" element={<AdminUsers />} />
+        )}
       </Route>
     </Routes>
   );
