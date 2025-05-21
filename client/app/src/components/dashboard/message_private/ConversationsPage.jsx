@@ -63,6 +63,7 @@ function ConversationPage() {
       const res = await axios.get(`http://localhost:8000/api/messages_private/conversations/${conversationId}/messages`, { withCredentials: true });
       setSelectedMessages(res.data);
       setSelectedConversationId(conversationId);
+      console.log("Requête GET envoyée avec succès :", res.data);
     } catch (err) {
       console.error("Erreur affichage messages:", err);
     }
@@ -71,11 +72,12 @@ function ConversationPage() {
   const handleSendMessage = async () => {
     if (!messageInput.trim() || !selectedConversationId) return;
     try {
-      await axios.post(
+      const res = await axios.post(
         `http://localhost:8000/api/messages_private/${selectedConversationId}`,
         { content: messageInput },
         { withCredentials: true }
       );
+      console.log("Requête POST envoyée avec succès :", res.data);
       setMessageInput("");
       handleAfficherMessages(selectedConversationId);
     } catch (err) {

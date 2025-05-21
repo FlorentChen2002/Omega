@@ -14,6 +14,7 @@ function Forum({ user }) {
     const getAllSujet = async() =>{
         try {
             const response = await axios.get('http://localhost:8000/api/forum/sujet');
+            console.log("Requête GET envoyée avec succès :", response.data);
             if (response.status==200){
                 setMemoire(response.data);
                 setSujets(response.data);

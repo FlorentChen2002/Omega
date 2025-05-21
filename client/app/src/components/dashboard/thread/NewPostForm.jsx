@@ -17,7 +17,7 @@ const NewPostForm = ({ user,sujet,commentaire }) => {
         date: commentaire.date
       }] : [];
 
-      await axios.post('http://localhost:8000/api/forum/post', {
+      const response =await axios.post('http://localhost:8000/api/forum/post', {
         sujetid: sujet._id,
         content: content,
         userid: user._id,
@@ -26,6 +26,7 @@ const NewPostForm = ({ user,sujet,commentaire }) => {
         prive:sujet.prive,
         repond: repondData
       });
+      console.log("Requête POST envoyée avec succès :", response.data);
       setContent("");
       window.location.reload();
     }catch(e){

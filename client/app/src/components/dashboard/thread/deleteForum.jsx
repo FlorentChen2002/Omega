@@ -9,6 +9,7 @@ function DeleteForum({commentaire,query}){
     const supprimer = async() =>{
         try {
             const response = await axios.delete(`http://localhost:8000/api/forum/delete/${query}`,{ data: { id: commentaire._id } });
+            console.log("Requête DELETE envoyée avec succès :", response.data);
             if (response.status==200){
                 if (query==="sujet"){
                     navigate("/forum");

@@ -13,15 +13,18 @@ function AdminUsers() {
   const fetchUsers = async () => {
     const res = await axios.get("http://localhost:8000/api/admin/rocher", { withCredentials: true });
     setUsers(res.data);
+    console.log("Requête GET envoyée avec succès :", res.data);
   };
 
   const handleAction = async (id, action) => {
     let url = `http://localhost:8000/api/admin/${action}/${id}`;
     try {
       if (action === "refuse") {
-        await axios.delete(url, { withCredentials: true });
+        const res = await axios.delete(url, { withCredentials: true });
+        console.log("Requête DELETE envoyée avec succès :", res.data);
       } else {
-        await axios.post(url, {}, { withCredentials: true });
+        const res = await axios.post(url, {}, { withCredentials: true });
+        console.log("Requête POST envoyée avec succès :", res.data);
       }
       fetchUsers(); // refresh list
     } catch (err) {

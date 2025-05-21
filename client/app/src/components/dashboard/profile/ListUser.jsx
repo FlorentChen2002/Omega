@@ -12,6 +12,7 @@ const ListUser = () => {
     const getAllUser = async() =>{
         try {
             const response = await axios.get('http://localhost:8000/api/user/alluser');
+            console.log("Requête GET envoyée avec succès :", response.data);
             if (response.status==200){
                 setMemoire(response.data);
                 setUsers(response.data);

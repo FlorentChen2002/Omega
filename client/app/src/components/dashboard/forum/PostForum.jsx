@@ -28,6 +28,7 @@ function PostForum({ user }) {
             const response = await axios.post('http://localhost:8000/api/forum/postforum', {
                 titre:titre,description:contenu,date:new Date().toLocaleString('fr-FR'),userid:user._id,userpseudo:user.pseudo,private:prive
             });
+            console.log("Requête POST envoyée avec succès :", response.data);
             if (response.data.status==201){
                 setTitre("");
                 setContenu("");

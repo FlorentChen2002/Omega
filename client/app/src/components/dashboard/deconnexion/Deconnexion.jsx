@@ -10,6 +10,7 @@ function Deconnexion() {
         const response = await axios.post('http://localhost:8000/api/user/logout', {}, {
             withCredentials: true
         });
+        console.log("Requête POST envoyée avec succès :", response.data);
         if (response.status === 200) {
             navigate("/");
             window.location.reload();

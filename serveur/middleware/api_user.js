@@ -215,6 +215,7 @@ function init(db) {
     });
     */
     router.get("/alluser", async(req, res) => {
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const tmp = await users.getAllUser();
             if (tmp===null){
@@ -233,6 +234,7 @@ function init(db) {
     });
 
     router.delete("/delete/:user", async (req, res) =>{//supprimer un utilisateur de la base donnee LoginDB
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         const { id } = req.body;
         if (!id) {
             res.status(400).json({ status: 400, message: "ID de l'utilasteur manquant" });

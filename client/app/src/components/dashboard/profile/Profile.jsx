@@ -14,6 +14,7 @@ function Profile({user}) {
     try {
       const response = await axios.get(`http://localhost:8000/api/user/${userid}`
       );
+      console.log("Requête GET envoyée avec succès :", response.data);
       if (response.status==200){
         setUsers(response.data);
         setRang(response.data.rang.toString()==="admin");
@@ -28,6 +29,7 @@ function Profile({user}) {
 
     try {
       const response = await axios.get('http://localhost:8000/api/forum/allthread');
+      console.log("Requête GET envoyée avec succès :", response.data);
       if (response.status==200){
         let responseCopy=[...response.data];
         responseCopy=responseCopy.filter((responses) => responses.user_id.toString()===userid.toString());

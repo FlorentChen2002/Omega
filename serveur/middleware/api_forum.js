@@ -15,6 +15,7 @@ function init(db) {
     });
     const forum = new Forum.default(db);
     router.get("/sujet", async (req, res) =>{//obtenir toutes les sujets
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const tmp = await forum.getAllSujet();
             console.log(tmp);
@@ -33,6 +34,7 @@ function init(db) {
         }
     });
     router.get("/allthread", async (req, res) =>{//obtenir toutes les threads
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const tmp = await forum.getAllThread();
             if (tmp===null){
@@ -50,6 +52,7 @@ function init(db) {
         }
     });
     router.get("/thread", async (req, res) =>{//obtenir un thread specifique
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const sujetid = req.query.sujetid;
             const tmp = await forum.getThread(sujetid);
@@ -69,6 +72,7 @@ function init(db) {
         }
     });
     router.post("/postforum", async (req, res) =>{//creation d un sujet
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const {titre,description,date,userid,userpseudo,private} = req.body;
             if( titre && description && date && userid && userpseudo ){
@@ -96,6 +100,7 @@ function init(db) {
         }
     });
     router.post("/post", async (req, res) =>{//creation d un thread
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const {sujetid,content,userid,userpseudo,date,prive,repond} = req.body;
             if(sujetid && content && userid && userpseudo && date){
@@ -123,6 +128,7 @@ function init(db) {
         }
     });
     router.delete("/delete/sujet", async (req, res) =>{// supprimer un sujet + les commentaires qui va avec
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         const { id } = req.body;
         console.log(id);
         if (!id) {
@@ -140,14 +146,13 @@ function init(db) {
         }
     });
     router.delete("/delete/thread", async (req, res) =>{// supprimer un commentaire/thread
+        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         const { id } = req.body;
-        console.log(id);
         if (!id) {
             res.status(400).json({ status: 400, message: "ID du sujet manquant" });
         }
         try {
             const deleted = await forum.deleteThread(id);
-            console.log(deleted);
             if (!deleted) {
                 res.status(404).json({ status: 404, message: "thread non trouvé" });
             }
