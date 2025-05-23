@@ -80,10 +80,10 @@ Je me suis également occupé de la structuration du projet ainsi que de l’imp
 
 #### Problèmes rencontrés
 
-J'ai rencontré des difficultés pour transmettre des données entre deux composants parents.  
+-J'ai rencontré des difficultés pour transmettre des données entre deux composants parents.  
 Avec du recul, j'aurais pu contourner ce problème en passant une fonction en prop à un composant enfant, ce qui lui aurait permis de modifier le state de l’un des parents afin de transmettre les données à un autre enfant.
 
-
+-J'ai eu du mal à faire une vidéo de moins de 12 minutes
 ---
 
 ## Travail effectué par  Adam Chaara
