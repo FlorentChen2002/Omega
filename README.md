@@ -18,7 +18,7 @@ mongosh
 ```
 2. Dans le deuxième terminal, on lance le serveur :
 ```bash
-cd serveur
+cd serveur/
 npm start
 ```
 3. Dans le troisième terminal, on lance le client :
