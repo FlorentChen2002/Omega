@@ -7,10 +7,13 @@ import LayoutForum from "./forum/LayoutForum";
 import ListUser from "./profile/ListUser";
 import AdminUsers from "./adminpage/AdminUsers";
 import ConversationPages from "./message_private/ConversationsPage";
-
 import { Routes, Route, Navigate } from "react-router-dom";
 import Principale from "./thread/principale";
 
+
+
+//Définit les routes principales de l'application selon le rôle de l'utilisateur.
+//Affiche les différentes pages (forum, profil, admin,messages,utilisateurs..) via react-router-dom.
 function DashBoard({ users }) {
   if (!users) {
     return <p>Chargement de l'utilisateur...</p>; // ou un loader

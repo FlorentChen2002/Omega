@@ -9,14 +9,14 @@ const app = express();
 const session = require ('express-session');
 const cors = require('cors');
 
-app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
   }));
+app.use(express.json());
 app.use(session({
     secret : "technoweb",
-    resave : true,
+    resave : false,
     saveUninitialized: false,
     cookie: { 
         secure: false, // Mettez à true si vous êtes en HTTPS

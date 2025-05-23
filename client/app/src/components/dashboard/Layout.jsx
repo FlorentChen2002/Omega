@@ -4,6 +4,9 @@ import Header from "./Header";
 import Deconnexion from "./deconnexion/Deconnexion";
 import "./forum/styles.css";
 
+
+
+//Structure principale de la page avec header, barre de navigation latérale et contenu dynamique via Outlet.
 const Layout = ({user}) => {
     useEffect(() => {
         document.body.classList.add("forum");

@@ -3,6 +3,9 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import "./profile.css";
 
+// Composant d'affichage de profil utilisateur.
+// Affiche les informations de l'utilisateur, son statut (admin ou non), et l'historique de ses messages visibles selon les droits.
+
 function Profile({user}) {
   const [messages,setMessages] = useState([]);
   const location = useLocation();
@@ -12,7 +15,7 @@ function Profile({user}) {
 
   const otherUser = async(userid) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/user/${userid}`
+      const response = await axios.get(`http://localhost:8000/api/user/${userid}`,{ withCredentials: true }
       );
       console.log("Requête GET envoyée avec succès :", response.data);
       if (response.status==200){
@@ -28,7 +31,7 @@ function Profile({user}) {
   const getMessage = async(userid) =>{
 
     try {
-      const response = await axios.get('http://localhost:8000/api/forum/allthread');
+      const response = await axios.get('http://localhost:8000/api/forum/allthread',{ withCredentials: true });
       console.log("Requête GET envoyée avec succès :", response.data);
       if (response.status==200){
         let responseCopy=[...response.data];

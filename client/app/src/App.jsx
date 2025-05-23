@@ -22,6 +22,7 @@ function App() {
         withCredentials: true
       });
       if(response.data){
+        console.log("Requête GEt envoyée avec succès :", response.data);
         setUser(response.data);
         setIsLoading(true);
       }

@@ -4,12 +4,14 @@ import NewPostForm from "./NewPostForm";
 import DeleteForum from "./deleteForum";
 import "./styles.css";
 
+//Affiche un message d'utilisateur avec ses métadonnées, les réponses associées,
+//et des actions comme répondre, supprimer ou accéder au profil.
 function Commentaire({ sujet, commentaire, user }) {
   const [showForm, setShowForm] = useState(false);
   const [showDeleteComposant, setShowDeleteComposant] = useState(false);
   //const [showRepond, setShowRepond] = useState(false);
   const navigate = useNavigate();
-  const showRepond = commentaire.repond[0].content;
+  const showRepond = commentaire?.repond[0]?.content;
   const showDelete = user._id.toString()===commentaire.user_id.toString() || user.rang.toString()==="admin";
   const userid=commentaire.user_id;
   //console.log(user._id.toString(),commentaire.user_id.toString(), showDelete);

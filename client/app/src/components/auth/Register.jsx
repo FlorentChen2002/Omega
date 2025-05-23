@@ -1,15 +1,18 @@
 import React, { useState,useEffect } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./Login.css";
 
-function Signup(props) {
+// Composant d'inscription utilisateur.
+// Vérifie les mots de passe, enregistre le compte et connecte l'utilisateur.
+function Signup({ refreshAuth }) {
   //state
   const [pseudo, setPseudo] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [passOK, setPassOK] = useState(true);
   const [passRegister, setPassRegister] = useState(true);
+  const navigate = useNavigate();
   
   useEffect(() => {
     document.body.classList.add("login");
@@ -38,19 +41,22 @@ function Signup(props) {
           login: pseudo, password: password1,date: new Date().toLocaleDateString('fr-FR'),rang: "users"
         });
         setPassRegister(true);
-        // Affiche la réponse reçue du serveur
         console.log("Requête POST envoyée avec succès :", response.data);
         setPassOK(false);
         if (response.data.status==200){
+          await axios.post('http://localhost:8000/api/user/login', {
+            login: pseudo, password: password1
+          },{ withCredentials: true });
           console.log("connexion");
           setPassRegister(false);
           setPseudo("");
           setPassword1("");
           setPassword2("");
           setPassOK(true);
+          refreshAuth();
+          navigate("/")
         }
       } catch (error) {
-        // Gère les erreurs éventuelles (connexion, serveur, etc.)
         setPassOK(false);
         console.error("Erreur lors de l'envoi de la requête :", error);
       }

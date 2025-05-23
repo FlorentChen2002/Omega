@@ -178,6 +178,7 @@ function init(db) {
         });
     })
     router.get("/userid", async(req,res) =>{//obtenir les donnees du user_id
+        if (!req.session.userid) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         const userid = req.query.userid;
         if(!userid){
             return res.status(401).json({
@@ -215,7 +216,7 @@ function init(db) {
     });
     */
     router.get("/alluser", async(req, res) => {
-        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
+        if (!req.session.userid) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
         try{
             const tmp = await users.getAllUser();
             if (tmp===null){
@@ -230,24 +231,6 @@ function init(db) {
 
         }catch(e){
             res.status(500).send(e);
-        }
-    });
-
-    router.delete("/delete/:user", async (req, res) =>{//supprimer un utilisateur de la base donnee LoginDB
-        if (!req.session.userId) return res.status(401).json({ error: "L'utilisateur n'est pas connecté" });
-        const { id } = req.body;
-        if (!id) {
-            res.status(400).json({ status: 400, message: "ID de l'utilasteur manquant" });
-        }
-        try {
-            const deleted = await users.deleteUser(id);
-            if (!deleted) {
-                res.status(404).json({ status: 404, message: "User non trouvé" });
-            }
-
-            res.status(200).json({ status: 200, message: "User supprimé" });
-        } catch (err) {
-            res.status(500).json({error: err.message });
         }
     });
     router

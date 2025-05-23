@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 //import axios from 'axios';
 import './search.css';
 
+// Composant de barre de recherche générique.
+// Prend une fonction onRecherche en prop, appelée lors de la soumission avec la requête utilisateur.
 function Recherche({onRecherche}) {
   const [query, setQuery] = useState('');
   /*

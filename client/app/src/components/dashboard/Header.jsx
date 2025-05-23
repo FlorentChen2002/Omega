@@ -1,6 +1,9 @@
 import React from "react";
 import { Link,useNavigate } from "react-router-dom";
 
+
+
+//Barre de navigation latérale avec liens vers les principales sections.
 const Header = ({user}) => {
   //comportement
   const navigate = useNavigate();

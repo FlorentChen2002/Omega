@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ConversationPage.css";
 
+//Le composant ConversationPage permet à un utilisateur connecté d’échanger des messages privés 
+//avec d’autres utilisateurs via une interface de messagerie.
 function ConversationPage() {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [conversations, setConversations] = useState([]);

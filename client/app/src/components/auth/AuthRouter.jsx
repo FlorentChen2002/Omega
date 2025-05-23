@@ -1,3 +1,5 @@
+// Composant de routage pour l'authentification (login/register).
+// Utilise `refreshAuth` pour mettre à jour l'état après connexion/inscription.
 import React from "react";
 import Register from "./Register";
 import Login from "./Login";
@@ -9,7 +11,7 @@ function AuthRouter({ refreshAuth }) {
     <Routes>
       <Route index element={<Login refreshAuth={refreshAuth} />} />
       <Route path="/login" element={<Login refreshAuth={refreshAuth} />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register refreshAuth={refreshAuth}/>} />
     </Routes>
   );
 }

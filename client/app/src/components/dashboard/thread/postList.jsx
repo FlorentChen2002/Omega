@@ -2,6 +2,8 @@ import React from "react";
 import Commentaire from "./commentaire";
 import "./styles.css";
 
+
+//Affiche la liste des commentaires d'un sujet de forum.
 const PostList = ({ sujet,commentaires, user }) => { 
   return (
     <div className="commentaire">

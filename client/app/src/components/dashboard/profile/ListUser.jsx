@@ -4,14 +4,16 @@ import Recherche from "../recherche/Recherche";
 import axios from "axios";
 import "./profile.css";
 
-const ListUser = () => { 
+// Composant d'affichage et de recherche des utilisateurs.
+// Permet de filtrer les utilisateurs par pseudo et d'accéder à leur profil.
+function ListUser(){ 
     const [memoire, setMemoire] = useState([]);
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
     const getAllUser = async() =>{
         try {
-            const response = await axios.get('http://localhost:8000/api/user/alluser');
+            const response = await axios.get('http://localhost:8000/api/user/alluser',{ withCredentials: true });
             console.log("Requête GET envoyée avec succès :", response.data);
             if (response.status==200){
                 setMemoire(response.data);

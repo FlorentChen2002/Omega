@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./styleadmin.css";
 
+
+//Composant AdminUsers
+//Interface d’administration pour gérer les utilisateurs :
+//promotion/dégradation admin, validation, suppression et recherche par pseudo.
 function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");

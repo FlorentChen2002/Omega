@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import DeleteForum from "./deleteForum";
 import "./styles.css";
 
+
+//Affiche les détails d’un sujet de forum avec options pour répondre,
+//accéder au profil de l’auteur, et supprimer si autorisé.
 function PostSujet({ user, sujet }) {
   const [showDeleteComposant, setShowDeleteComposant] = useState(false);
   const showDelete = user._id.toString()===sujet.user_id.toString() || user.rang.toString()==="admin";

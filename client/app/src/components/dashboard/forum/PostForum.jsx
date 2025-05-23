@@ -3,6 +3,8 @@ import React, { useState} from "react";
 import axios from 'axios';
 import "./styles.css";
 
+// Composant de création d'un sujet de forum.
+// Permet à l'utilisateur de poster un sujet (privé si admin).
 function PostForum({ user }) {
 
     //state
@@ -27,7 +29,7 @@ function PostForum({ user }) {
         try {
             const response = await axios.post('http://localhost:8000/api/forum/postforum', {
                 titre:titre,description:contenu,date:new Date().toLocaleString('fr-FR'),userid:user._id,userpseudo:user.pseudo,private:prive
-            });
+            },{ withCredentials: true });
             console.log("Requête POST envoyée avec succès :", response.data);
             if (response.data.status==201){
                 setTitre("");

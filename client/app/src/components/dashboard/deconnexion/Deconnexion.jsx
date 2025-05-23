@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./deconnexion.css";
 
+// Composant de déconnexion utilisateur.
+// Envoie une requête pour déconnecter l'utilisateur et redirige vers la page d'accueil.
 function Deconnexion() {
   const navigate = useNavigate();
 

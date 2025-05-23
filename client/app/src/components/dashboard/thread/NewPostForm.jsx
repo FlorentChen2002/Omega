@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import "./styles_module.css";
 import axios from 'axios';
 
+//Formulaire pour poster un nouveau commentaire ou une réponse dans un sujet de forum.
+//Envoie les données au serveur via une requête POST.
+
 const NewPostForm = ({ user,sujet,commentaire }) => {
   const [content, setContent] = useState("");
   //serveur
@@ -25,7 +28,7 @@ const NewPostForm = ({ user,sujet,commentaire }) => {
         date: new Date().toLocaleString('fr-FR'),
         prive:sujet.prive,
         repond: repondData
-      });
+      },{ withCredentials: true });
       console.log("Requête POST envoyée avec succès :", response.data);
       setContent("");
       window.location.reload();

@@ -5,6 +5,10 @@ import PostSujet from "./postSujet";
 import PostList from "./postList";
 import axios from 'axios';
 
+
+//Affiche un sujet de forum, sa liste de commentaires (threads) 
+//et un formulaire pour poster un nouveau commentaire.
+//Charge les commentaires depuis l'API au chargement.
 function Principale({user}) {
   const [threads,setThreads] = useState([]);
   const location = useLocation();
@@ -12,9 +16,11 @@ function Principale({user}) {
 
   const getAllThread = async() =>{
     try {
-      const response = await axios.get('http://localhost:8000/api/forum/thread',
-        {params: { sujetid: sujet._id }}
-      );
+      const response = await axios.get('http://localhost:8000/api/forum/thread', {
+        params: { sujetid: sujet._id },
+        withCredentials: true
+      });
+      console.log("Requête GET envoyée avec succès :", response.data);
       if (response.status==200){
         setThreads(response.data);
       }

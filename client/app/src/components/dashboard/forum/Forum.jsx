@@ -4,6 +4,9 @@ import Recherche from "../recherche/Recherche";
 import axios from 'axios';
 import "./styles.css";
 
+// Composant d'affichage des sujets/topic du forum.
+// Récupère tous les sujets et permet une recherche par titre.
+// Les sujets privés sont visibles uniquement par les admins.
 function Forum({ user }) {
     // État initial
     const [memoire, setMemoire] = useState([]);
@@ -13,7 +16,7 @@ function Forum({ user }) {
     // comportement
     const getAllSujet = async() =>{
         try {
-            const response = await axios.get('http://localhost:8000/api/forum/sujet');
+            const response = await axios.get('http://localhost:8000/api/forum/sujet',{ withCredentials: true });
             console.log("Requête GET envoyée avec succès :", response.data);
             if (response.status==200){
                 setMemoire(response.data);
